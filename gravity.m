@@ -85,5 +85,3 @@ TSDP[datfile_] := Module[
 
 TSDP["out.json"]
 
-
-
