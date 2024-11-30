@@ -38,7 +38,7 @@ P[n_, J_, m_]:=NIntegrate[p^nX[6, -p^2,m, J, 7], {p, 0.02, 1}];
 *)
 
 
-nulllist = {5, 5, 5, 5}
+nulllist = {15, 10, 10, 5}
 list0 = Table[0, {i, 1, Total[nulllist]+Length[nulllist]}]
 
 
@@ -80,12 +80,12 @@ TSDP[datfile_] := Module[
         
         
        Flatten[{
-       Flatten[Table[Poly[i, 1/j],{i, 0, 40, 2},{j, 1/(20*mu), 1/mu, 1/(20*mu)}]],
+       Flatten[Table[Poly[i, 1/j],{i, 0, 40, 2},{j, 1/(400*mu), 1/mu, 1/(400*mu)}]],
        Flatten[Table[NewPoly[b],{b, 1/250, 40, 1/32}]]
        },1],
 
-        norm =  -1 * Flatten[{N[Table[Integrate[(-((x^4 (4-3 x^2))/(1-x^2)^2)+(2-x^2)/(1-x^2)^2)x^i,{x,0,1}],{i,2,num}],300], list0}],
-        obj  = -1 * N[(Flatten[{Table[1/(i-1),{i,2,num}], list0}] + 2 * (0)  * Flatten[{Table[1/(i+1),{i,2,num}], list0}]+0 * Flatten[{Table[1/(i+3),{i,2,num}], list0}]),300]
+        norm =  -1 * Flatten[{N[Table[Integrate[(-(x^4 (4-3 x^2))/(1-x^2)^2+(2-x^2)/(1-x^2)^2)x^i,{x,0,1}],{i,2,num}],300], list0}],
+        obj  = -1 * N[(Flatten[{Table[1/(i-1),{i,2,num}], list0}] + 2 * (1)  * Flatten[{Table[1/(i+1),{i,2,num}], list0}]+(1) * Flatten[{Table[1/(i+3),{i,2,num}], list0}]),300]
 
         (*
         norm =  {1/5, 1/6, 1/7, 1/8, 1/9, 1/10},
