@@ -84,8 +84,8 @@ TSDP[datfile_] := Module[
        Flatten[Table[NewPoly[b],{b, 1/250, 40, 1/100}]]
        },1],
 
-        norm =  -1 * Flatten[{N[Table[Integrate[(-(x^4 (4-3 x^2))/(1-x^2)^2+(2-x^2)/(1-x^2)^2)x^i,{x,0,1}],{i,2,num}],300], list0}],
-        obj  = -1 * N[(Flatten[{Table[1/(i-1),{i,2,num}], list0}] + 2 * (1)  * Flatten[{Table[1/(i+1),{i,2,num}], list0}]+(1) * Flatten[{Table[1/(i+3),{i,2,num}], list0}]),300]
+        norm =  -1 * Flatten[{N[Table[Integrate[(-(x^4 (4-3 x^2))/(1-x^2)^2+(2-x^2)/(1-x^2)^2)x^i,{x,0, mu}],{i,2,num}],300], list0}],
+        obj  = -1 * N[(Flatten[{Table[1/(i-1)*mu^(i-1),{i,2,num}], list0}] + 2 * (1)  * Flatten[{Table[1/(i+1)*mu^(i+1),{i,2,num}], list0}]+(1) * Flatten[{Table[1/(i+3)*mu^(i+3),{i,2,num}], list0}]),300]
 
         (*
         norm =  {1/5, 1/6, 1/7, 1/8, 1/9, 1/10},
