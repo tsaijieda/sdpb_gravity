@@ -23,9 +23,9 @@ for ((i = 0; i < ${#list[@]}; i++))
         docker run --shm-size=4096m -v "$dir":/data bootstrapcollaboration/sdpb:master pmp2sdp 1024 -i /data/out.json -o /data/out
 
 	echo "Running sdpb"
-        docker run --shm-size=4096m -v "$dir":/data bootstrapcollaboration/sdpb:master mpirun --allow-run-as-root -n 48 sdpb --dualityGapThreshold=1e-80 --primalErrorThreshold=1e-80 --dualErrorThreshold=1e-80 --precision=1024 --procsPerNode=32 --maxIterations=5000 -s /data/out
+        docker run --shm-size=4096m -v "$dir":/data bootstrapcollaboration/sdpb:master mpirun --allow-run-as-root -n 48 sdpb --dualityGapThreshold=1e-30 --primalErrorThreshold=1e-30 --dualErrorThreshold=1e-30 --precision=1024 --procsPerNode=32 --maxIterations=5000 -s /data/out
         
-	python3 store_result.py out_out/out.txt result/spin0_fast_5.txt
+	python3 store_result.py out_out/out.txt result/spin2_change_g.txt
 
         #rm -rf upper_spectrum 
 
