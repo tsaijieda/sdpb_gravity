@@ -9,7 +9,7 @@ a1 = ToExpression[ReadList["/home/string-12/sdpb_gravity/range.txt"][[3]]]
 
 
 nulllist = {5, 3, 0, 0};
-num1 = 41/2;
+num1 = 61/2;
 list0 = Table[0, {i, 1, Total[nulllist]+Length[nulllist]}];
 
 
@@ -37,14 +37,14 @@ Xlist10new[n_,mu_,x_,J_] := Table[Xlist10[i,mu,x][[J/2+1]],{i,3/2,61/2,1}] . coe
 
 
 Poly[J_, x_, y_]:=PositiveMatrixWithPrefactor[
-        DampedRational[1,{},1/E,y],{{Flatten[{Table[Cimp2new[n ,mu1,x, J],{n,7/2,num1}], Table[Xlist4new[n,mu1,x, J],{n,7/2,7/2+nulllist[[1]]}], Table[Xlist6new[n,mu1,x, J],{n,7/2,7/2+nulllist[[2]]}], Table[Xlist8new[n,mu1,x, J],{n,7/2,7/2+nulllist[[3]]}], Table[Xlist10new[n,mu1,x, J],{n,7/2,7/2+nulllist[[4]]}]}]}}];
+        DampedRational[1,{},1/E,y],{{Flatten[{Table[Cimp2list [n ,mu1,x][[J/2+1]],{n,3/2,num1}], Table[Xlist4[n,mu1,x][[J/2+1]] ,{n,0,nulllist[[1]]}], Table[Xlist6[n,mu1,x][[J/2+1]],{n,0,nulllist[[2]]}], Table[Xlist8[n,mu1,x][[J/2+1]],{n,0,nulllist[[3]]}], Table[Xlist10[n,mu1,x][[J/2+1]],{n,0,nulllist[[4]]}]}]}}];
 
 NewPoly[b_]:=PositiveMatrixWithPrefactor[
-        DampedRational[1,{},1/E,x],{{Flatten[{Table[(Gn[i, 10, Sqrt[mu1]*b, mu1] + Bn[i, 10, Sqrt[mu1]*b, mu1]),{i,7/2,num1}], list0}],Flatten[{Table[(Fn[i, 10,Sqrt[mu1]*b, mu1]),{i,7/2,num1}], list0}]},
-        {Flatten[{Table[(Fn[i, 10, Sqrt[mu1]*b, mu1]),{i,7/2,num1}], list0}],Flatten[{Table[(Gn[i, 10, Sqrt[mu1]*b, mu1] - Bn[i, 10, Sqrt[mu1]*b, mu1]),{i,7/2,num1}], list0}]}}];
+        DampedRational[1,{},1/E,x],{{Flatten[{Table[(G[i, 10, Sqrt[mu1]*b, mu1] + B[i, 10, Sqrt[mu1]*b, mu1]),{i,3/2,num1}], list0}],Flatten[{Table[(F[i, 10,Sqrt[mu1]*b, mu1]),{i,3/2,num1}], list0}]},
+        {Flatten[{Table[(F[i, 10, Sqrt[mu1]*b, mu1]),{i,3/2,num1}], list0}],Flatten[{Table[(G[i, 10, Sqrt[mu1]*b, mu1] - B[i, 10, Sqrt[mu1]*b, mu1]),{i,3/2,num1}], list0}]}}];
 
 Polydis[b_, x_]:=PositiveMatrixWithPrefactor[
-        DampedRational[1,{},1/E,x],{{Flatten[{Table[Hn[n,10,b, mu1],{n,7/2,num1}], list0}]}}]        
+        DampedRational[1,{},1/E,x],{{Flatten[{Table[H[n,10,b, mu1],{n,3/2,num1}], list0}]}}]        
         (*        
 Poly[J_, m_]:=PositiveMatrixWithPrefactor[
         DampedRational[1,{},1/E,x],{{{K[2, J, m], K[3, J, m], K[4, J, m], K[5, J, m], K[6, J, m], K[7, J, m]}}}];        
@@ -61,14 +61,14 @@ TSDP[datfile_] := Module[
        Flatten[{
        Flatten[N[Table[Poly[i, 1/j, x],{i, 0, 40, 2},{j, 1/(100*mu1), 1/mu1, 1/(100*mu1)}],300]],
        {NewPoly[x-40]},
-       Flatten[N[Table[Polydis[i,x],{i, 1/32, 40, 1/32}],300]]
+       Flatten[N[Table[Polydis[i,x],{i, 1/32, 40, 1/128}],300]]
        },1],
 
         (*norm =  1 * Flatten[{Table[(mu1^((1+n)/2) (-21 mu1 (1+n)+13 (3+n)-9 (3+n)*Hypergeometric2F1[1,(1+n)/2,(3+n)/2,-(mu1)]))/(2 (1+n) (3+n)),{n,3/2,num1}], list0}],*)
         (*norm =  -1 * N[Flatten[{Table[1/(i+3)*mu1^((i+3)/2),{i,3/2,num1}], list0}],300],*)
-        norm =  1 * Flatten[{Table[Cimp2new[n,mu1,1,4],{n,7/2,num1}], list0}],
-        (*obj  = -1 * N[(Flatten[{Table[1/(i-1)*mu1^((i-1)/2),{i,3/2,num1}], list0}] + 2 * (28/mu1^2)  * Flatten[{Table[1/(i+1)*mu1^((i+1)/2),{i,3/2,num1}], list0}]+(0/mu1^3) * Flatten[{Table[1/(i+3)*mu1^((i+3)/2),{i,3/2,num1}], list0}]),300];*)
-		obj  = -1 * N[Flatten[{Table[Table[1/(i-1)*mu1^((i-1)/2),{i,3/2,61/2}] . coefflist[[n-5/2]],{n,7/2,num1}], list0}],300]
+        norm =  -1 * Flatten[{Table[Cimp2list[n,mu1,1][[4/2+1]],{n,3/2,num1}], list0}],
+        obj  = -1 * N[(Flatten[{Table[1/(i-1)*mu1^((i-1)/2),{i,3/2,num1}], list0}] + 2 * (1000/mu1^2)  * Flatten[{Table[1/(i+1)*mu1^((i+1)/2),{i,3/2,num1}], list0}]+(0/mu1^3) * Flatten[{Table[1/(i+3)*mu1^((i+3)/2),{i,3/2,num1}], list0}]),300]
+		(*obj  = -1 * N[Flatten[{Table[Table[1/(i-1)*mu1^((i-1)/2),{i,3/2,61/2}] . coefflist[[n-5/2]],{n,7/2,num1}], list0}],300]*)
         (*
         norm =  {1/5, 1/6, 1/7, 1/8, 1/9, 1/10},
         obj  =  {1, 1/2, 1/3, 1/4, 1/5, 1/6}
