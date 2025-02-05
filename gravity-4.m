@@ -66,8 +66,8 @@ TSDP[datfile_] := Module[
 
         (*norm =  1 * Flatten[{Table[(mu1^((1+n)/2) (-21 mu1 (1+n)+13 (3+n)-9 (3+n)*Hypergeometric2F1[1,(1+n)/2,(3+n)/2,-(mu1)]))/(2 (1+n) (3+n)),{n,3/2,num1}], list0}],*)
         (*norm =  -1 * N[Flatten[{Table[1/(i+3)*mu1^((i+3)/2),{i,3/2,num1}], list0}],300],*)
-        norm =  -1 * Flatten[{Table[Cimp2list[n,mu1,1][[4/2+1]],{n,3/2,num1}], list0}],
-        obj  = -1 * N[(Flatten[{Table[1/(i-1)*mu1^((i-1)/2),{i,3/2,num1}], list0}] + 2 * (1000/mu1^2)  * Flatten[{Table[1/(i+1)*mu1^((i+1)/2),{i,3/2,num1}], list0}]+(0/mu1^3) * Flatten[{Table[1/(i+3)*mu1^((i+3)/2),{i,3/2,num1}], list0}]),300]
+        norm =  1 * Flatten[{Table[Cimp2list[n,mu1,1][[2/2+1]],{n,3/2,num1}], list0}],
+        obj  = -1 * N[(Flatten[{Table[1/(i-1)*mu1^((i-1)/2),{i,3/2,num1}], list0}] + 2 * (0/mu1^2)  * Flatten[{Table[1/(i+1)*mu1^((i+1)/2),{i,3/2,num1}], list0}]+(0/mu1^3) * Flatten[{Table[1/(i+3)*mu1^((i+3)/2),{i,3/2,num1}], list0}]),300]
 		(*obj  = -1 * N[Flatten[{Table[Table[1/(i-1)*mu1^((i-1)/2),{i,3/2,61/2}] . coefflist[[n-5/2]],{n,7/2,num1}], list0}],300]*)
         (*
         norm =  {1/5, 1/6, 1/7, 1/8, 1/9, 1/10},
